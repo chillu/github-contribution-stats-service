@@ -1,0 +1,27 @@
+{
+  "name": "github-stats",
+  "version": "0.0.1",
+  "description": "Aggregate contribution stats against multiple repos",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev",
+    "test": "semistandard"
+  },
+  "author": "Ingo Schommer",
+  "license": "MIT",
+  "dependencies": {
+    "apollo-link": "^1.0.0",
+    "apollo-link-http": "^1.1.0",
+    "dotenv": "^4.0.0",
+    "graphql": "^0.11.7",
+    "graphql-tag": "^2.5.0",
+    "micro": "^9.0.1",
+    "ms": "^2.0.0",
+    "node-fetch": "^1.7.3"
+  },
+  "devDependencies": {
+    "micro-dev": "^1.3.0",
+    "semistandard": "^11.0.0"
+  }
+}
