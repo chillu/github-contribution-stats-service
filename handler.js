@@ -1,6 +1,7 @@
 const assert = require("assert");
 // const moment = require('moment');
 const db = require("./lib/db");
+const { addRepoStat } = require("./lib/writers");
 const apiGraphQl = require("./lib/api/github-graphql");
 // const apiRest = require('./lib/api/github-rest');
 const repoStats = require("./lib/stats/repo");
@@ -26,24 +27,26 @@ const dbName = process.env.DB_NAME;
 
 // const sinceMonths = process.env.SINCE_MONTHS ? process.env.SINCE_MONTHS : 6;
 // const since = moment().subtract(sinceMonths, 'months').startOf('month');
-
-const verbose = Boolean(process.env.VERBOSE);
+const verbose = process.env.VERBOSE == "true";
+const logger = verbose ? console.log : () => {};
 
 // Refresh data now and every X ms
 let data = {};
 
 async function collectRepoStats() {
-  const apiGraphQlCallable = apiGraphQl(token, { verbose });
-  const results = await repoStats(apiGraphQlCallable, repos);
+  const apiGraphQlCallable = apiGraphQl(token, { logger });
+  const results = await repoStats(apiGraphQlCallable, repos, { logger });
 
   // Store in database
-  const { addRepoStat } = await db(dbHost, dbUser, dbPassword, dbName);
+  const { query, end } = await db(dbHost, dbUser, dbPassword, dbName);
   Object.keys(results).forEach(repo => {
-    addRepoStat(repo, results[repo]);
+    addRepoStat(query, repo, results[repo]);
   });
 
   // Expose data
   data.repos = results;
+
+  end();
 }
 
 // async function collectEventStats () {
@@ -60,14 +63,12 @@ async function collectRepoStats() {
 //   data.events = results;
 // }
 
+export async function handle(event, context, callback) {
+  await collectRepoStats();
+}
+
 //Handle errors to provent V8 from shutting down in the future
 process.on("unhandledRejection", e => {
   console.log(e);
 });
 
-exports.main = async (event, context) => {
-  await collectRepoStats();
-
-  // TODO This shouldn't be necessary
-  process.exit();
-};

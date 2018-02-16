@@ -24,6 +24,6 @@ custom:
 
 functions:
   githubStats:
-    handler: handler.main
+    handler: handler.handle
     events:
       - schedule: rate(5 minutes)
