@@ -1,4 +1,4 @@
-CREATE TABLE `repos` (
+CREATE TABLE `repoStats` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `createdAt` datetime DEFAULT NULL,
   `nameWithOwner` varchar(1024) DEFAULT NULL,
@@ -17,5 +17,7 @@ CREATE TABLE `events` (
   `createdAt` datetime DEFAULT NULL,
   `login` varchar(1024) DEFAULT NULL,
   `type` varchar(20) DEFAULT NULL,
+  `action` varchar(20) DEFAULT NULL,
+  `state` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

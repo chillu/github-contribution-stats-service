@@ -2,10 +2,11 @@
   "name": "github-stats",
   "version": "0.0.1",
   "description": "Aggregate contribution stats against multiple repos",
-  "main": "index.js",
+  "main": "handler.js",
   "scripts": {
-    "start": "micro",
-    "dev": "micro-dev",
+    "serverless": "serverless",
+    "dev": "serverless invoke local -f githubStats",
+    "deploy": "serverless deploy",
     "test": "semistandard"
   },
   "author": "Ingo Schommer",
@@ -13,18 +14,31 @@
   "dependencies": {
     "apollo-link": "^1.0.0",
     "apollo-link-http": "^1.1.0",
+    "babel-runtime": "^6.26.0",
     "dotenv": "^4.0.0",
     "github": "^12.0.1",
     "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
-    "micro": "^9.0.1",
+    "jest": "^21.2.1",
     "moment": "^2.19.1",
-    "ms": "^2.0.0",
     "mysql2": "^1.4.2",
-    "node-fetch": "^1.7.3"
+    "node-fetch": "^1.7.3",
+    "source-map-support": "^0.4.18"
   },
   "devDependencies": {
-    "micro-dev": "^1.3.0",
-    "semistandard": "^11.0.0"
+    "@google-cloud/bigquery": "^0.11.1",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-source-map-support": "^1.0.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-3": "^6.24.1",
+    "minimist": "^1.2.0",
+    "prettier": "^1.10.2",
+    "serverless": "^1.26.0",
+    "serverless-webpack": "^4.3.0",
+    "webpack": "^3.11.0",
+    "webpack-node-externals": "^1.6.0",
+    "yargs": "^10.0.3"
   }
 }
