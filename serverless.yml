@@ -27,4 +27,4 @@ functions:
   githubStats:
     handler: handler.handle
     events:
-      - schedule: rate(5 minutes)
+      - schedule: rate(1 day)
