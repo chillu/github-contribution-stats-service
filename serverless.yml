@@ -4,6 +4,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   profile: playpen
+  region: ap-southeast-2
   environment:
     VERBOSE: ${file(./serverless.env.yml):VERBOSE}
     REPOS: ${file(./serverless.env.yml):REPOS}
