@@ -1,3 +1,4 @@
 serverless.env.yml
 node_modules/
 .webpack/
+.serverless/

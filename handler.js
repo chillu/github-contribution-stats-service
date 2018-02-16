@@ -60,6 +60,14 @@ async function collectRepoStats() {
 //   data.events = results;
 // }
 
-export const main = async (event, context) => {
+//Handle errors to provent V8 from shutting down in the future
+process.on("unhandledRejection", e => {
+  console.log(e);
+});
+
+exports.main = async (event, context) => {
   await collectRepoStats();
+
+  // TODO This shouldn't be necessary
+  process.exit();
 };
