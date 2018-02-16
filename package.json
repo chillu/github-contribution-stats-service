@@ -5,9 +5,9 @@
   "main": "handler.js",
   "scripts": {
     "serverless": "serverless",
-    "dev": "serverless invoke local -f githubStats",
-    "deploy": "serverless deploy",
-    "test": "semistandard"
+    "invoke": "serverless invoke -f githubStats",
+    "invoke-local": "serverless invoke local -f githubStats",
+    "deploy": "serverless deploy"
   },
   "author": "Ingo Schommer",
   "license": "MIT",
